@@ -6,8 +6,24 @@ public class CaesarCipher implements HumbabaCipher {
 	private boolean lettersOnly;
 	private boolean ignoreCase;
 	
+	//Original Caesar Cipher was shifted by 3
 	public CaesarCipher() {
 		this.shift = 3;
+		this.lettersOnly = true;
+		this.ignoreCase = true;
+	}
+	
+	public CaesarCipher(long shift) {
+		
+		if(shift < -25 || shift > 25) {
+			shift %= 26;
+		} 
+		
+		if(shift < 0) {
+			shift += 26;
+		}
+		
+		this.shift = (short)shift;
 		this.lettersOnly = true;
 		this.ignoreCase = true;
 	}
