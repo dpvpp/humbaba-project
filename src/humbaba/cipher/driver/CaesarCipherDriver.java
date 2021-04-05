@@ -14,7 +14,7 @@ public class CaesarCipherDriver {
 		char[] plainText = cipher.decrypt(cipherText);
 		System.out.println(plainText);
 		
-		cipher = new CaesarCipher(89, false);
+		cipher = new CaesarCipher(10000, false);
 		cipherText = cipher.encrypt("Secret message");
 		System.out.println(cipherText);
 		plainText = cipher.decrypt(cipherText);
