@@ -2,7 +2,7 @@ package humbaba.cipher;
 
 public class CaesarCipher implements HumbabaCipher {
 
-	private short shift;
+	private int shift;
 	private boolean lettersOnly;
 	private boolean ignoreCase;
 	
@@ -15,33 +15,56 @@ public class CaesarCipher implements HumbabaCipher {
 	
 	public CaesarCipher(long shift) {
 		
-		if(shift < -25 || shift > 25) {
-			shift %= 26;
+		shift = limitShift(shift, 25);
+		
+		this.shift = (int)shift;
+		this.lettersOnly = true;
+		this.ignoreCase = true;
+	}
+	
+	public CaesarCipher(long shift, boolean lettersOnly) {
+		
+		int max = Character.MAX_VALUE;
+		
+		if(lettersOnly) {
+			max = 25;
+		}
+		
+		shift = limitShift(shift, max);
+		
+		this.shift = (int)shift;
+		this.lettersOnly = lettersOnly;
+		this.ignoreCase = true;
+	}
+	
+	private static long limitShift(long shift, int max) {
+		
+		if(shift < -max || shift > max) {
+			shift %= (max + 1);
 		} 
 		
 		if(shift < 0) {
-			shift += 26;
+			shift += (max + 1);
 		}
 		
-		this.shift = (short)shift;
-		this.lettersOnly = true;
-		this.ignoreCase = true;
+		return shift;
+		
 	}
 	
 	private static char performShift(char c, int shift, char lowerLim, char upperLim) {
 		
 		c += shift;
 		if(c > upperLim) {
-			c -= 26;
+			c -= (upperLim - lowerLim + 1);
 		} else if (c < lowerLim) {
-			c += 26;
+			c += (upperLim - lowerLim + 1);
 		}
 		
 		return c;
 		
 	}
 	
-	private char[] performCaesar(char[] text, short adjustedShift) {
+	private char[] performCaesar(char[] text, int adjustedShift) {
 		
 		for(int i = 0; i < text.length; i++) {
 			
@@ -66,7 +89,9 @@ public class CaesarCipher implements HumbabaCipher {
 				}
 				
 			} else {
-				throw new RuntimeException("All ASCII not yet implemented");
+				
+				text[i] = performShift(text[i], adjustedShift, Character.MIN_VALUE, Character.MAX_VALUE);
+				
 			}
 			
 		}
@@ -76,7 +101,7 @@ public class CaesarCipher implements HumbabaCipher {
 	
 	@Override
 	public char[] encrypt(char[] text) {
-		short adjustedShift = this.shift;
+		int adjustedShift = this.shift;
 		return performCaesar(text, adjustedShift);
 	}
 
@@ -88,7 +113,7 @@ public class CaesarCipher implements HumbabaCipher {
 
 	@Override
 	public char[] decrypt(char[] text) {
-		short adjustedShift = (short) (this.shift * -1);
+		int adjustedShift = this.shift * -1;
 		return performCaesar(text, adjustedShift);
 	}
 
