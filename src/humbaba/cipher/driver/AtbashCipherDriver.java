@@ -14,6 +14,9 @@ public class AtbashCipherDriver {
 		char[] plainText = cipher.decrypt(cipherText);
 		System.out.println(plainText);
 		
+		for(char i = 0; i < Character.MAX_VALUE; i++) {
+			System.out.print(i);
+		}
 	}
 
 }
