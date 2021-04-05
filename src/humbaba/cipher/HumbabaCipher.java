@@ -1,6 +1,6 @@
-package humbaba.ciper;
+package humbaba.cipher;
 
-public interface HumabaCipher {
+public interface HumbabaCipher {
 	
 	public char[] encrypt(char[] text);
 	public char[] encrypt(String text);
