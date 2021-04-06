@@ -24,7 +24,7 @@ public class CaesarCipher implements HumbabaCipher {
 	
 	public CaesarCipher(long shift, boolean lettersOnly) {
 		
-		int max = Character.MAX_VALUE;
+		int max = 94;
 		
 		if(lettersOnly) {
 			max = 25;
@@ -90,7 +90,7 @@ public class CaesarCipher implements HumbabaCipher {
 				
 			} else {
 				
-				text[i] = performShift(text[i], adjustedShift, Character.MIN_VALUE, Character.MAX_VALUE);
+				text[i] = performShift(text[i], adjustedShift, ' ', '~');
 				
 			}
 			
