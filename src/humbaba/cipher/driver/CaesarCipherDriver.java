@@ -14,11 +14,15 @@ public class CaesarCipherDriver {
 		char[] plainText = cipher.decrypt(cipherText);
 		System.out.println(plainText);
 		
-		cipher = new CaesarCipher(10000, false);
+		cipher = new CaesarCipher(94, false);
 		cipherText = cipher.encrypt("Secret message");
 		System.out.println(cipherText);
 		plainText = cipher.decrypt(cipherText);
 		System.out.println(plainText);
+		
+//		for(char i = 50000; i < 57000; i++) {
+//			System.out.println((int)i + ". " + i);
+//		}
 		
 	}
 	
