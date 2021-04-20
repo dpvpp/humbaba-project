@@ -7,7 +7,7 @@ public class ScytaleCipherDriver {
 	
 	public static void main(String[] args) {
 		
-		HumbabaCipher cipher = new ScytaleCipher();
+		HumbabaCipher cipher = new ScytaleCipher(3);
 		
 		char[] cipherText = cipher.encrypt("Make sure your message is not too short");
 		System.out.println(cipherText);

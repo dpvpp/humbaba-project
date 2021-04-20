@@ -18,14 +18,19 @@ public class ScytaleCipher implements HumbabaCipher {
 		for(int i = 0; i < text.length; i++)
 		{
 			if(j >= text.length) {
+				if(text.length % columns == 0) {
+					j++;
+				}
 				j -= text.length;
 			}
+			
 			if(wind) {
 				result[i] = text[j]; 
 			} else {
 				result[j] = text[i]; 
 			}
-			j = j + columns;
+			
+			j += columns;
 		}
 		return result;
 	}
